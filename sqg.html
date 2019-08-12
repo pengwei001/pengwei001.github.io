@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SQG</title>
+    <meta name="description" content="a research project webpage">
+    <link rel="stylesheet" href="main.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+
+<div id="header-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <header id="header">
+                    <h1><a href="frac.html" id="logo">Research</a></h1>
+                    <nav id="nav">
+                        <a href="index.html">Homepage</a>
+                        <a href="frac.html">fractional laplacians</a>
+                        <a href="electroconvection.html">Electrocovection</a>
+                        <a href="sqg.html" class="current-page-item">surface quasi-geostrophic </a>
+                    </nav>
+                </header>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body>
+
+    <h1>Electrocovection</h1>
+    <h2>Introduction</h2>
+    <p>
+        The general 3D quasi-geostrophic equations, first introduced by J.G. Charney in the 1940s, have been very successful in describing major features of large-scale motions in the atmosphere and the oceans near the poles of the earth where the Coriolis force is strong. The govering equation is a transport equation with a fractional disspation term:
+        $${\partial_t \theta} + \mathbf{u}\cdot \nabla \theta
+        + \kappa(-\Delta)^{s}\theta = 0, \quad
+        \textbf{u} = \nabla^{\bot}\psi, \quad
+        (-\Delta)^{1/2} \psi= -\theta \quad\text{ in }\; \Omega.$$
+        Here \(\Omega\) is an open bounded domain with Lipschitz boundary sitting on the \(xy\) plane, the potential temperature \(\theta = \theta(\mathbf{x},t)\) is a scalar function defined on \(\Omega\times[0,\texttt T]\) with \(\texttt T>0\), \(\nabla^{\bot}\psi = (-\partial_y \psi, \partial_x \psi)^T\), and \(\psi\) is the potential.
+        The fractional power \(s \in [1/2,1)\), and the coefficient \(\kappa \ge 0\).
+        The non-local property of the fractional term is the main difficulty in both analysis and numerical apprximation. Both fractional operators are spectral fractional Laplacians.
+    </p>
+    <p>
+        The velocity \(\textbf{u}\) indicates that the motion is along the iso-bars of \(\psi\), due to the fact that the gradient pressure is canceled by the Coriolis force in the gradient direction. For instance, for a high-pressure area near the south pole, the pressure gradient is pointing outward, while the Coriolis force is perpendicular to the direction of the movement to the left side, therefore the rotation should be counter-clockwise, so that the two forces are balanced. The fractional term \(\kappa(-\Delta)^{s}\theta \) is the so-called Ekman pumping, representing a balance between the vertical component of the Coriolis force and vertical frictional force. In particular, the SQG equation with \(\kappa > 0\) and \(s = 1/2\) arises in geophysical studies of strongly rotating fluids.
+    </p>
+
+    <h2>Numerical Simulations</h2>
+    <h3>A manufactured test case</h3>
+
+    <p>
+        Initial condition: \(\theta(x,y) = \sin(x)\sin(y) + \cos(y)\). The inviscid case \(\kappa = 0\) (left) is compared with the viscid-limit case \(\kappa=0.001\) and \(s = 0.5\) (right).
+    </p>
+    <div class="video">
+        <video width="720" height="360" controls>
+            <source src="viscid_inviscid_compare1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <h3>Vortex simulation</h3>
+    <p>
+        Initially \(\theta(x,y) = \exp\left(-(x-\pi)^2-16(y-\pi)^2\right)\), which corresponds to an ellipse of eccentricity 4, depicts a spinning flat vortex tending to shed filaments. It resembles cyclonic circulations within the atmosphere.
+    </p>
+    <div class="video">
+        <video width="720" height="480" controls>
+            <source src="vortex_ref10_high_resolution.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+</body>
+
+</html>

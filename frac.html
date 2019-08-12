@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Electroconvection</title>
+    <meta name="description" content="a research project webpage">
+    <link rel="stylesheet" href="main.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+
+<div id="header-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <header id="header">
+                    <h1><a href="frac.html" id="logo">Research</a></h1>
+                    <nav id="nav">
+                        <a href="index.html">Homepage</a>
+                        <a href="frac.html" class="current-page-item">fractional laplacians</a>
+                        <a href="electroconvection.html"> Electrocovection</a>
+                        <a href="sqg.html">surface quasi-geostrophic</a>
+                    </nav>
+                </header>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body>
+
+    <h1>Fractional Laplacians</h1>
+    <h2>Spectral Fractional Laplacian and Integral Fractional Laplacian</h2>
+    <p>
+        Two different types of fractional differential operators are considered: the <em>spectral</em> fractional Laplacian and the <em>integral</em> fractional Laplacian.
+        The former is defined by spectral decomposition:
+        the fractional operator \((-\Delta)^s\) for \(s\in (0,1)\) is defined by an eigenvalue shift of the eigenfunction expansion, namely, given \(v\in D((-\Delta)^s):=\{v\in L^2(\Omega) \;:\; (-\Delta)^s v\in L^2(\Omega) \}\),
+        $$(-\Delta)^s v = \sum_{j=0}^\infty \lambda_j^s (v,\psi_j) \psi_j,$$
+        where \((\cdot,\cdot)\) denotes the \(L^2\) inner product and \(\{\psi_j\}\) is an orthonormal basis of eigenfunctions of \(-\Delta\) corresponding to eigenvalues \(\{\lambda_j\}\) which are organized in the ascending order.
+    </p>
+    <p>
+        The second type of fractional Laplacian is defined through the Fourier transform on the whole space \(\mathbb R^d\).
+        For \(v\) in the Schwartz space, the integral fractional Laplacian is a pseudo-differential operator with symbol \(|\zeta|^{2s}\),
+        $$\mathscr{F} ((-\Delta)^s v)(\zeta) = |\zeta|^{2s}\mathscr{F}(v)(\zeta),$$
+        with \(\mathscr{F}\) denoting the Fourier transform.
+        The definition can be extended to the Sobolev space \(\mathcal H^s(\mathbb R^d)\) by a density argument.
+    </p>
+
+    <h2>Approximation</h2>
+    <h3>Approximation of Spectral Fractional Operators</h3>
+    <p>
+        Consider the following generalized stationary fractional problem: for \(s\in (0,1)\), given \(f \in L^2(\Omega)\), find \(u \in D((-\Delta)^s)\) such that
+        $$(-\Delta)^s u = f \;\text{in}\; \Omega, \qquad u = 0 \;\text{on}\; \partial\Omega,$$
+        where the fractional operator \((-\Delta)^s\) is spectral.
+        Kato proposed an integral representation to the solution \((-\Delta)^{-s}f\) with a complex Jordan curve running in the resolvent set of \(-\Delta\).
+        A proper deforming of such contour yields the following so-called Balakrishnan formula,
+        $$u = (-\Delta)^{-s} f
+        = \frac{c_s}{2} \int_{0}^{\infty} \mu^{-s} (\mu I-\Delta)^{-1} f \,d \mu
+        = c_s \int_{-\infty}^{\infty} e^{2st} (I-e^{2t}\Delta)^{-1} f \,d t,$$
+        where \(c_s:={2\sin(\pi s)}/{\pi}\).
+        Following the above integral representation, the numerical approximation consists of two steps:
+    </p>
+    <ol type="i">
+        <li> apply a numerical integral scheme on a set of quadrature points \(\{t_j\}\) and truncate the higher order terms; </li>
+        <li> use finite element method to approximate \((I-e^{2t_j}\Delta)^{-1} f\) for each \(j\) on the <em>same</em> mesh. </li>
+    </ol>
+    <p>
+        Regarding the numerical integral scheme, we employ an exponentially convergent SINC quadrature, namely,
+        $$u \approx u^{k}
+        = c_s \sum_{j = -N_{-}}^{N_{+}} e^{2st_j} (I-e^{2t_j}\Delta)^{-1} f,$$
+        where \(k\) is the quadrature step size, the quadrature points \(t_j = jk\),
+        \(N_{+} = \left\lceil \frac{2\pi^2}{sk^2} \right\rceil,
+        \;\text{and}\;
+        N_{-} = \left\lceil \frac{4\pi^2}{(\delta-s) k^2} \right\rceil\).
+
+    </p>
+
+
+    <h3>Approximation to spectral inner product \(((-\Delta)^{s/2}u, (-\Delta)^{s/2}\varphi)\)</h3>
+
+    <p>
+        For \(u,\varphi\in D((-\Delta)^{s/2})\), the inner product can be represented by an integral
+        $$\left( (-\Delta)^{s/2} u, (-\Delta)^{s/2}\varphi \right) =: a^s(u,\varphi)
+        = c_s \int_{-\infty}^{\infty} e^{-2st}
+        \Big(e^{2t}(-\Delta)(I - e^{2t}{\Delta})^{-1} u, \varphi\Big) dt.$$
+        The numerical approximation to the inner product follows essentially the same two steps as in the spectral fractional operator approximation.
+    </p>
+    <h3>Approximation of integral fractional Laplacian</h3>
+    <p>
+        Consider the following model problem involving the integral fractional Laplacian: given \(f\in L^2(\Omega)\), find \(u\) satisfying
+        $$(-\Delta)^s \tilde u = f \;\text{in}\; \Omega.$$
+        Here \(\tilde u\) denotes the extension by zero outside the domain \(\Omega\).
+        Unlike the spectral fractional Laplacian, there is no direct formula for the solution \(\tilde u\).
+        In stead, the approximation is based on an iterative algorithm which monitors the residue.
+        Consequently, the implement of action of the operator is required and can be represented by an integral
+        $$ \tilde a^s(u,\varphi)
+        :=\left( (-\Delta)^{s/2} \tilde u, (-\Delta)^{s/2}\tilde\varphi \right)_{\mathbb R^d}
+        = \frac{c_s}{2} \int_{-\infty}^{\infty} e^{st}
+        \Big((-\Delta)(e^tI-\Delta)^{-1}\tilde u, \varphi\Big)_\Omega dt, $$
+        with \(w,\varphi\) in \(\mathcal H^s(\Omega)\), the real interpolation space between \(L^2(\Omega)\) and \(H^1_0(\Omega)\).
+        The integral formula suggests the following approximation strategy:
+    </p>
+    <ol type="i">
+        <li>apply the SINC quadrature scheme so that the integral could be approximated by a finite sum of inner products involving the solution to an elliptic partial differential equations defined on the entire space \(\mathbb R^d\), that is, solving \((-\Delta)(e^tI-\Delta)^{-1}\tilde u\) on a finite set of quadrature points \(\{t_j\}\);</li>
+        <li>on <em>each</em> quadrature point \(t_j\), approximate the problem on the <em>entire</em> space by a problem with vanishing boundary condition on a bounded truncated convex domain \(\Omega^{M}(t_j)\) with \(M\) a positive constant; </li>
+        <li>use continuous piecewise linear finite element approximation for each of the truncated problems.</li>
+    </ol>
+
+
+</body>
+
+</html>
